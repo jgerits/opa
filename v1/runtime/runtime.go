@@ -51,6 +51,7 @@ import (
 	"github.com/open-policy-agent/opa/v1/plugins"
 	"github.com/open-policy-agent/opa/v1/plugins/discovery"
 	filelogger "github.com/open-policy-agent/opa/v1/plugins/logger/file"
+	otellogger "github.com/open-policy-agent/opa/v1/plugins/logger/opentelemetry"
 	"github.com/open-policy-agent/opa/v1/plugins/logs"
 	metrics_config "github.com/open-policy-agent/opa/v1/plugins/server/metrics"
 	"github.com/open-policy-agent/opa/v1/repl"
@@ -1125,6 +1126,7 @@ func generateDecisionID() string {
 func init() {
 	registeredPlugins = map[string]plugins.Factory{
 		filelogger.Name: &filelogger.Factory{},
+		otellogger.Name: &otellogger.Factory{},
 	}
 }
 
