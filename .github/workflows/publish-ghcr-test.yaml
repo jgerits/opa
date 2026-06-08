@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       image_name:
-        description: "Full image name (for example ghcr.io/<owner>/opa-test)"
+        description: "Full image name (e.g. ghcr.io/<owner>/opa-test)"
         required: true
         type: string
       image_tag:
@@ -79,6 +79,15 @@ jobs:
             echo "IMAGE_TAG=$INPUT_TAG" >> "$GITHUB_ENV"
           else
             echo "IMAGE_TAG=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
+          fi
+
+      - name: Validate image tag
+        env:
+          IMAGE_TAG: ${{ env.IMAGE_TAG }}
+        run: |
+          if [[ ! "$IMAGE_TAG" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}$ ]]; then
+            echo "Invalid image_tag: '$IMAGE_TAG'"
+            exit 1
           fi
 
       - name: Build and push multi-arch images
