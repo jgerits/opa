@@ -192,6 +192,19 @@ The following secrets are used by the Github Action workflows:
 | SLACK_NOTIFICATION_WEBHOOK | Slack webhook for sending notifications. Optional -- If not provided the notification steps are skipped.                                                        |
 | NETLIFY_BUILD_HOOK_URL     | URL to trigger Netlify (openpolicyagent.org) deploys after release. Optional -- If not provided the Netlify steps are skipped.                                  |
 
+### Publish a test image to GHCR
+
+To build and publish a test image from your branch to your own GitHub Container Registry repository, run the
+`Publish Test Image to GHCR` workflow manually from the Actions tab.
+
+The workflow expects:
+
+- `image_name`: full target image name like `ghcr.io/<owner>/opa-test`
+- `image_tag` (optional): tag to push (defaults to short commit SHA)
+
+It uses the repository `GITHUB_TOKEN` for authentication, so your repository/package settings must allow workflow
+write access to packages.
+
 ### Periodic Workflows
 
 Some of the Github Action workflows are triggered on a schedule, and not included in the
