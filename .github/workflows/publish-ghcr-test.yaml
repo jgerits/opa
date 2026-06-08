@@ -84,5 +84,5 @@ jobs:
       - name: Build and push multi-arch images
         env:
           DOCKER_IMAGE: ${{ inputs.image_name }}
-          VERSION: ${{ env.IMAGE_TAG }}
-        run: make push-manifest-list-${VERSION}
+          IMAGE_TAG: ${{ env.IMAGE_TAG }}
+        run: make "push-manifest-list-${IMAGE_TAG}"
