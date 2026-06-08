@@ -7,6 +7,7 @@ package opentelemetry
 import (
 	"context"
 	"crypto/tls"
+	"errors"
 	"fmt"
 	"log/slog"
 	"strings"
@@ -96,7 +97,7 @@ func (p *Plugin) Start(ctx context.Context) error {
 	defer p.mtx.Unlock()
 
 	if p.handler != nil {
-		return fmt.Errorf("OpenTelemetry logger already started")
+		return errors.New("OpenTelemetry logger already started")
 	}
 
 	provider, err := newLoggerProvider(ctx, p.config)
