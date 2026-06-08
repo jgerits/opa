@@ -85,7 +85,7 @@ jobs:
         env:
           IMAGE_TAG: ${{ env.IMAGE_TAG }}
         run: |
-          if [[ ! "$IMAGE_TAG" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}$ ]]; then
+          if [[ ! "$IMAGE_TAG" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$ ]]; then
             echo "Invalid image_tag: '$IMAGE_TAG'"
             exit 1
           fi
