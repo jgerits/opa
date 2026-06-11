@@ -12,6 +12,7 @@ import (
 	"net"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"sync"
 	"testing"
 	"time"
@@ -227,9 +228,9 @@ func anyValueString(value *commonpb.AnyValue) string {
 	case *commonpb.AnyValue_StringValue:
 		return v.StringValue
 	case *commonpb.AnyValue_IntValue:
-		return fmt.Sprintf("%d", v.IntValue)
+		return strconv.FormatInt(v.IntValue, 10)
 	case *commonpb.AnyValue_BoolValue:
-		return fmt.Sprintf("%t", v.BoolValue)
+		return strconv.FormatBool(v.BoolValue)
 	case *commonpb.AnyValue_DoubleValue:
 		return fmt.Sprintf("%v", v.DoubleValue)
 	default:
